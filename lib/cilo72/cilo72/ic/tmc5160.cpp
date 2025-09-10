@@ -69,7 +69,6 @@ namespace cilo72
         }
         Tmc5160::Status Tmc5160::writeRegister(uint8_t addr, uint32_t tx)
         {
-
             Status ret;
             tmc5xxx_reg_write(tmc5xxx_, addr, tx, &ret.reg);
 
@@ -79,17 +78,8 @@ namespace cilo72
         Tmc5160::Status Tmc5160::readRegister(uint8_t addr, uint32_t *rx)
         {
             Status ret;
-
             tmc5xxx_reg_read(tmc5xxx_, addr, rx, &ret.reg);
-/*
-            if (lastReadAddr_ != addr)
-            {
-                xfer(addr, READ, 0, 0); // dummy read
-            }
-            ret = xfer(addr, READ, 0, rx);
 
-            lastReadAddr_ = addr;
-*/
             return ret;
         }
 

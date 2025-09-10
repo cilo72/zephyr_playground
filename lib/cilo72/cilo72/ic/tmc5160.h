@@ -15,7 +15,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "cilo72/hw/spi_device.h"
+#include <tmc5xxx.h>
 
 namespace cilo72
 {
@@ -765,7 +765,6 @@ namespace cilo72
             uint32_t rsens_;
             uint32_t fclk_;
 
-            //Status xfer(uint8_t addr, uint8_t read, uint32_t tx, uint32_t *rx);
             Status writeRegister(uint8_t addr, uint32_t tx);
             Status readRegister(uint8_t addr, uint32_t *rx);
         };
