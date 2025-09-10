@@ -1,0 +1,29 @@
+# Copyright (c) 2023 Daniel Zwirner
+# SPDX-License-Identifier: MIT-0
+
+menuconfig TMC5XXX
+	bool "TMC5XXX Driver"
+	help
+	  This option enables the TMC5xxx driver class.
+
+if TMC5XXX
+
+config TMC5XXX_INIT_PRIORITY
+	int "TMC5xxx device drivers init priority"
+	default KERNEL_INIT_PRIORITY_DEVICE
+	help
+	  TMC5xxx device drivers init priority.
+
+module = TMC5XXX
+module-str = tmc5xxx
+source "subsys/logging/Kconfig.template.log_config"
+
+config TMC5XXX_SPI
+	bool "SPI-controlled LED TMC5xxx driver"
+	default y
+	depends on DT_HAS_TMC5XXX_SPI_ENABLED
+	select SPI
+	help
+	  Enable this option to use the SPI-controlled TMC5xxx driver.
+
+endif # TMC5XXX

@@ -1,0 +1,64 @@
+#include <zephyr/dt-bindings/led/led.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+
+/ {
+    chosen {
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+    
+    aliases {
+		spi0  = &pio0_spi0;
+		tmc5xxx0 = &tmc5xxx;
+	};
+
+};
+
+&zephyr_udc0 {
+    cdc_acm_uart0: cdc_acm_uart0 {
+    	compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};
+
+&pinctrl {
+	pio0_spi0_default: pio0_spi0_default {
+		/* gpio 17 is used for chip select, not assigned to the PIO */
+		group1 {
+			pinmux = <PIO0_P18>, <PIO0_P19>;
+		};
+		group2 {
+			pinmux = <PIO0_P16>;
+			input-enable;
+		};
+	};
+};
+
+&pio0 {
+	status = "okay";
+
+	pio0_spi0: pio0_spi0 {
+		compatible = "raspberrypi,pico-spi-pio";
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		clocks = <&clocks RPI_PICO_CLKID_CLK_SYS>;
+		miso-gpios = <&gpio0 16 0>;
+		cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+		clk-gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+		mosi-gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
+
+		pinctrl-0 = <&pio0_spi0_default>;
+		pinctrl-names = "default";
+		status = "okay";
+
+		tmc5xxx: tmc5xxx@0 {
+			compatible = "tmc5xxx-spi";
+			reg = <0>;
+			diag0-gpios = <&gpio0 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Diag0 pin */
+			enable-gpios = <&gpio0 20 (GPIO_ACTIVE_LOW)>;
+			spi-max-frequency = <DT_FREQ_M(1)>;
+		};
+	};
+};
+

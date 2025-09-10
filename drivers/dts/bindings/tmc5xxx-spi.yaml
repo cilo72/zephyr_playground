@@ -1,0 +1,35 @@
+# Copyright (c) 2023 Daniel Zwirner
+# SPDX-License-Identifier: MIT-0
+
+description: |
+  Analog Devices TMC5XXX Stepper Motor Controller (SPI mode).
+  Only register read and write functions are available.
+
+  Example definition in devicetree:
+
+    spi0 {
+      tmc5xxx: tmc5xxx@0 {
+        compatible = "tmc5xxx-spi";
+        reg = <0>;
+        diag0-gpios = <&gpio0 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Diag0 pin */
+        spi-max-frequency = <DT_FREQ_M(1)>;
+      };
+    };
+
+compatible: "tmc5xxx-spi"
+
+include: spi-device.yaml
+
+properties:
+  diag0-gpios:
+    type: phandle-array
+    description: |
+      Diagnostics output DIAG0 pin. This pin enables interrupt-based
+      rampstat handling, allowing the driver to respond to motor events
+      like position reached or stall detection without polling.
+      Should be configured as push-pull output (active high).
+
+  enable-gpios:
+    type: phandle-array
+    description: |
+      Enable pin.

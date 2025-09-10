@@ -1,0 +1,6 @@
+# /Kconfig
+# this is all you need!
+source "Kconfig.zephyr"
+
+rsource "../drivers/Kconfig"
+rsource "../lib/Kconfig"
