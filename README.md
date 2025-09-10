@@ -1,2 +1,2 @@
-# zepyhr_playground
-Zepyhr Playground
+# zephyr_playground
+Zephyr Playground
