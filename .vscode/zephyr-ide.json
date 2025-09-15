@@ -1,0 +1,62 @@
+{
+  "projects": {
+    "app": {
+      "rel_path": "app",
+      "name": "app",
+      "buildConfigs": {
+        "build/rpi_pico/rp2040": {
+          "relBoardSubDir": "raspberrypi/rpi_pico",
+          "board": "rpi_pico/rp2040",
+          "name": "build/rpi_pico/rp2040",
+          "westBuildArgs": "",
+          "westBuildCMakeArgs": " -DCONFIG_DEBUG_OPTIMIZATIONS=y -DCONFIG_DEBUG_THREAD_INFO=y ",
+          "confFiles": {
+            "config": [],
+            "extraConfig": [],
+            "overlay": [
+              "app/app-rp2040.overlay"
+            ],
+            "extraOverlay": []
+          },
+          "runnerConfigs": {
+            "openocd": {
+              "runner": "openocd",
+              "name": "openocd",
+              "args": ""
+            }
+          }
+        },
+        "build/eval_f7": {
+          "relBoardDir": "boards",
+          "relBoardSubDir": "hse/eval_f7",
+          "board": "eval_f7",
+          "name": "build/eval_f7",
+          "westBuildArgs": "",
+          "westBuildCMakeArgs": " -DCONFIG_DEBUG_OPTIMIZATIONS=y -DCONFIG_DEBUG_THREAD_INFO=y ",
+          "confFiles": {
+            "config": [],
+            "extraConfig": [],
+            "overlay": [
+              "app/app-eval-f7.overlay"
+            ],
+            "extraOverlay": []
+          },
+          "runnerConfigs": {
+            "openocd": {
+              "runner": "openocd",
+              "name": "openocd",
+              "args": ""
+            }
+          }
+        }
+      },
+      "twisterConfigs": {},
+      "confFiles": {
+        "config": [],
+        "extraConfig": [],
+        "overlay": [],
+        "extraOverlay": []
+      }
+    }
+  }
+}

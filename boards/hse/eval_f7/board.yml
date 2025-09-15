@@ -1,0 +1,6 @@
+board:
+  name: eval_f7
+  full_name: HSE-5555 eval f7
+  vendor: HSE
+  socs:
+    - name: stm32f767xx

@@ -1,0 +1,25 @@
+identifier: eval_f7
+name: HSE EVAL F7
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+ram: 512
+flash: 2048
+supported:
+  - adc
+  - uart
+  - gpio
+  - netif:eth
+  - usb_device
+  - i2c
+  - pwm
+  - spi
+  - nvs
+  - watchdog
+  - counter
+  - can
+  - dac
+  - rtc
+vendor: HSE

@@ -1,0 +1,26 @@
+#include <zephyr/dt-bindings/led/led.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+
+/ {
+    
+    aliases {
+		led0 = &led_200;
+		tmc5xxx0 = &tmc5xxx;
+	};
+
+};
+
+&spi5 {
+	pinctrl-0 = <&spi5_sck_pf7 &spi5_miso_pf8 &spi5_mosi_pf9>;
+	pinctrl-names = "default";
+	cs-gpios = <&gpioe 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	status = "okay";
+	tmc5xxx: tmc5xxx@0 {
+			compatible = "tmc5xxx-spi";
+			reg = <0>;
+			diag0-gpios = <&gpioe 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Diag0 pin */
+			enable-gpios = <&gpiof 2 (GPIO_ACTIVE_LOW)>;
+			spi-max-frequency = <DT_FREQ_M(1)>;
+		};
+};
